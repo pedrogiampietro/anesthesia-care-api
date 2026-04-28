@@ -26,6 +26,8 @@ JWT_SECRET="uma-chave-bem-longa"
 CORS_ORIGIN="*"
 ```
 
+Essas variáveis ficam somente na Vercel e no seu `.env.local`. Nunca coloque credenciais do Neon em arquivos versionados ou no código.
+
 Crie as tabelas no Neon com uma destas opções:
 
 ```bash
