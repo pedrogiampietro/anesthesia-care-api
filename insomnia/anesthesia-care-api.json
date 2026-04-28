@@ -1,0 +1,364 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2026-04-28T00:00:00.000Z",
+  "__export_source": "anesthesia-care-api",
+  "resources": [
+    {
+      "_id": "wrk_anesthesia_care_api",
+      "_type": "workspace",
+      "name": "Anesthesia Care API",
+      "description": "Requests para autenticação, pacientes, produtos e medicamentos."
+    },
+    {
+      "_id": "env_anesthesia_care_local",
+      "_type": "environment",
+      "parentId": "wrk_anesthesia_care_api",
+      "name": "Local",
+      "data": {
+        "base_url": "http://localhost:3000",
+        "token": ""
+      }
+    },
+    {
+      "_id": "fld_auth",
+      "_type": "request_group",
+      "parentId": "wrk_anesthesia_care_api",
+      "name": "Auth"
+    },
+    {
+      "_id": "req_health",
+      "_type": "request",
+      "parentId": "wrk_anesthesia_care_api",
+      "name": "Health",
+      "method": "GET",
+      "url": "{{ _.base_url }}/api/health"
+    },
+    {
+      "_id": "req_register",
+      "_type": "request",
+      "parentId": "fld_auth",
+      "name": "Register",
+      "method": "POST",
+      "url": "{{ _.base_url }}/api/auth/register",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"Pedro\",\n  \"email\": \"pedro@example.com\",\n  \"password\": \"senha-segura-123\"\n}"
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ]
+    },
+    {
+      "_id": "req_login",
+      "_type": "request",
+      "parentId": "fld_auth",
+      "name": "Login",
+      "method": "POST",
+      "url": "{{ _.base_url }}/api/auth/login",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"pedro@example.com\",\n  \"password\": \"senha-segura-123\"\n}"
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ]
+    },
+    {
+      "_id": "req_me",
+      "_type": "request",
+      "parentId": "fld_auth",
+      "name": "Me",
+      "method": "GET",
+      "url": "{{ _.base_url }}/api/auth/me",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ]
+    },
+    {
+      "_id": "fld_patients",
+      "_type": "request_group",
+      "parentId": "wrk_anesthesia_care_api",
+      "name": "Patients"
+    },
+    {
+      "_id": "req_patients_list",
+      "_type": "request",
+      "parentId": "fld_patients",
+      "name": "List Patients",
+      "method": "GET",
+      "url": "{{ _.base_url }}/api/patients",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ]
+    },
+    {
+      "_id": "req_patients_create",
+      "_type": "request",
+      "parentId": "fld_patients",
+      "name": "Create Patient",
+      "method": "POST",
+      "url": "{{ _.base_url }}/api/patients",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"Paciente 01\",\n  \"age\": 45,\n  \"weight\": 70,\n  \"height\": 170,\n  \"sex\": \"M\",\n  \"asa\": \"ASA II\",\n  \"notes\": \"Sem observações\"\n}"
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ]
+    },
+    {
+      "_id": "req_patient_by_id",
+      "_type": "request",
+      "parentId": "fld_patients",
+      "name": "Get Patient by ID",
+      "method": "GET",
+      "url": "{{ _.base_url }}/api/patients/:id",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ]
+    },
+    {
+      "_id": "req_patient_update",
+      "_type": "request",
+      "parentId": "fld_patients",
+      "name": "Update Patient",
+      "method": "PATCH",
+      "url": "{{ _.base_url }}/api/patients/:id",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"weight\": 72,\n  \"asa\": \"ASA III\"\n}"
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ]
+    },
+    {
+      "_id": "req_patient_delete",
+      "_type": "request",
+      "parentId": "fld_patients",
+      "name": "Delete Patient",
+      "method": "DELETE",
+      "url": "{{ _.base_url }}/api/patients/:id",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ]
+    },
+    {
+      "_id": "fld_products",
+      "_type": "request_group",
+      "parentId": "wrk_anesthesia_care_api",
+      "name": "Products"
+    },
+    {
+      "_id": "req_products_list",
+      "_type": "request",
+      "parentId": "fld_products",
+      "name": "List Products",
+      "method": "GET",
+      "url": "{{ _.base_url }}/api/products",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ]
+    },
+    {
+      "_id": "req_products_create",
+      "_type": "request",
+      "parentId": "fld_products",
+      "name": "Create Product",
+      "method": "POST",
+      "url": "{{ _.base_url }}/api/products",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"Seringa 20 mL\",\n  \"description\": \"Seringa descartável\",\n  \"sku\": \"SER-20ML\",\n  \"category\": \"insumo\",\n  \"unit\": \"unidade\",\n  \"priceCents\": 250,\n  \"stockQuantity\": 100,\n  \"isActive\": true\n}"
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ]
+    },
+    {
+      "_id": "req_product_by_id",
+      "_type": "request",
+      "parentId": "fld_products",
+      "name": "Get Product by ID",
+      "method": "GET",
+      "url": "{{ _.base_url }}/api/products/:id",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ]
+    },
+    {
+      "_id": "req_product_update",
+      "_type": "request",
+      "parentId": "fld_products",
+      "name": "Update Product",
+      "method": "PATCH",
+      "url": "{{ _.base_url }}/api/products/:id",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"stockQuantity\": 80,\n  \"isActive\": true\n}"
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ]
+    },
+    {
+      "_id": "req_product_delete",
+      "_type": "request",
+      "parentId": "fld_products",
+      "name": "Delete Product",
+      "method": "DELETE",
+      "url": "{{ _.base_url }}/api/products/:id",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ]
+    },
+    {
+      "_id": "fld_medications",
+      "_type": "request_group",
+      "parentId": "wrk_anesthesia_care_api",
+      "name": "Medications"
+    },
+    {
+      "_id": "req_medications_list",
+      "_type": "request",
+      "parentId": "fld_medications",
+      "name": "List Medications",
+      "method": "GET",
+      "url": "{{ _.base_url }}/api/medications",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ]
+    },
+    {
+      "_id": "req_medications_create",
+      "_type": "request",
+      "parentId": "fld_medications",
+      "name": "Create Medication",
+      "method": "POST",
+      "url": "{{ _.base_url }}/api/medications",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"Propofol\",\n  \"genericName\": \"Propofol\",\n  \"category\": \"hipnótico\",\n  \"concentration\": \"10 mg/mL\",\n  \"dosageForm\": \"ampola\",\n  \"route\": \"IV\",\n  \"unit\": \"mL\",\n  \"minDose\": 1.5,\n  \"maxDose\": 2.5,\n  \"doseUnit\": \"mg/kg\",\n  \"notes\": \"Indução anestésica\",\n  \"isActive\": true\n}"
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ]
+    },
+    {
+      "_id": "req_medication_by_id",
+      "_type": "request",
+      "parentId": "fld_medications",
+      "name": "Get Medication by ID",
+      "method": "GET",
+      "url": "{{ _.base_url }}/api/medications/:id",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ]
+    },
+    {
+      "_id": "req_medication_update",
+      "_type": "request",
+      "parentId": "fld_medications",
+      "name": "Update Medication",
+      "method": "PATCH",
+      "url": "{{ _.base_url }}/api/medications/:id",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"notes\": \"Atualizado via Insomnia\"\n}"
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ]
+    },
+    {
+      "_id": "req_medication_delete",
+      "_type": "request",
+      "parentId": "fld_medications",
+      "name": "Delete Medication",
+      "method": "DELETE",
+      "url": "{{ _.base_url }}/api/medications/:id",
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}"
+        }
+      ]
+    }
+  ]
+}
