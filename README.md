@@ -42,6 +42,12 @@ npm run dev
 
 A API local fica em `http://localhost:3000`.
 
+No deploy, a raiz `/` mostra uma página simples de status. O teste real da API é:
+
+```text
+/api/health
+```
+
 ## Deploy na Vercel + Neon
 
 1. Crie/importe o projeto na Vercel apontando para `anesthesia-care-api`.
